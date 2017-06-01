@@ -1,8 +1,3 @@
-let count = 0;
-let sparkling = 0;
-let dusty = 0;
-let rancid = 0;
-
 $(() => {
   fetchGarageItems();
 });
@@ -13,9 +8,23 @@ const fetchGarageItems = () => {
     return response.json();
   })
   .then((garageItems) => {
-    console.log(garageItems);
     appendItems(garageItems)
   });
+};
+
+const updateCouters = (cleanliness) => {
+  const totalNum = $('.total-items-count').text()
+  $('.total-items-count').text(parseInt(totalNum, 10) +1);
+  if (cleanliness === 'sparkling') {
+    const sparkNum = $('.sparkling-items-count').text();
+    $('.sparkling-items-count').text(parseInt(sparkNum, 10) +1);
+  } else if (cleanliness === 'dusty') {
+    const dustyNum = $('.dusty-items-count').text()
+    $('.dusty-items-count').text(parseInt(dustyNum, 10) +1);
+  } else {
+    const rancidNum = $('.rancid-items-count').text()
+    $('.rancid-items-count').text(parseInt(rancidNum, 10) +1);
+  }
 };
 
 const appendItems = (garageItems) => {
@@ -24,41 +33,6 @@ const appendItems = (garageItems) => {
     updateCouters(garageItem.cleanliness.toLowerCase());
     $('#garage').append(itemNode);
   });
-  renderCounters();
-};
-
-const updateCouters = (cleanliness) => {
-  count++;
-  if (cleanliness === 'sparkling') {
-    sparkling ++;
-  } else if (cleanliness === 'dusty') {
-    dusty++;
-  } else {
-    rancid++;
-  }
-};
-
-const renderCounters = () => {
-  const counterDiv = $(`
-    <div class="counter-div">
-      <h6>Total Items: ${count}</h6>
-      <h6>Sparkling: ${sparkling}</h6>
-      <h6>Dusty: ${dusty}</h6>
-      <h6>Ranicd: ${rancid}</h6>
-    </div>
-  `);
-  $('body').append(counterDiv);
-};
-
-$('.add-item-btn').on('click', () => {
-  grabInputValues();
-})
-
-const grabInputValues = () => {
-  const nameInputVal = $('.name-input').val();
-  const reasonInputVal = $('.reason-input').val();
-  const cleanlinessInputVal = $('.cleanliness-input').val();
-  addNewItem(nameInputVal, reasonInputVal, cleanlinessInputVal);
 };
 
 const addNewItem = (name, reason, cleanliness) => {
@@ -68,11 +42,20 @@ const addNewItem = (name, reason, cleanliness) => {
     body: JSON.stringify({ name, reason, cleanliness }),
   })
   .then((response) => {
-    console.log(response);
     return response.json();
   })
   .then((newItem) => {
-    console.log(newItem);
     appendItems(newItem);
   });
 };
+
+const grabInputValues = () => {
+  const nameInputVal = $('.name-input').val();
+  const reasonInputVal = $('.reason-input').val();
+  const cleanlinessInputVal = $('.cleanliness-input').val();
+  addNewItem(nameInputVal, reasonInputVal, cleanlinessInputVal);
+};
+
+$('.add-item-btn').on('click', () => {
+  grabInputValues();
+});
