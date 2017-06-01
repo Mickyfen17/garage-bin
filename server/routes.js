@@ -25,7 +25,7 @@ router.post('/garage/new', (request, response) => {
 
   database('garage').insert(garageItem, ['id', 'name', 'reason', 'cleanliness'])
     .then((newItem) => {
-      response.status(201).json(...newItem);
+      response.status(201).json(newItem);
     })
     .catch((error) => {
       response.status(500).send({ error });
