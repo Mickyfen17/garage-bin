@@ -45,14 +45,14 @@ const fetchSingleItem = (id) => {
 };
 
 const itemDetails = (item) => {
-  const closeBtn = $(`<button class="close-btn">X</button>`);
+  const closeBtn = $(`<button class="close-btn">Close</button>`);
   const updateBtn = $(`<button class="update-btn">Update</button>`);
   const details = $(`
     <article class="item-details">
       <div class="details-wrapper">
         <h6>${item.name}</h6>
         <p>${item.reason}</p>
-        <select class="cleanliness-input" name="Cleanliness">
+        <select class="cleanliness-input-details" name="Cleanliness">
           <option value="Sparkling">Sparkling</option>
           <option value="Dusty">Dusty</option>
           <option value="Rancid">Rancid</option>
@@ -61,6 +61,7 @@ const itemDetails = (item) => {
     </article>
   `);
   closeDetails(closeBtn);
+  updateItem(updateBtn, item.id);
   $('#garage').append(details.append(closeBtn, updateBtn));
 }
 
@@ -68,6 +69,21 @@ const closeDetails = (closeBtn) => {
   closeBtn.on('click', () => {
     $('.item-details').remove();
   })
+}
+
+const updateItem = (updateBtn, id) => {
+  updateBtn.on('click', () => {
+    patchItem(id);
+  });
+};
+
+const patchItem = (id) => {
+  const cleanliness = $('.cleanliness-input-details').val();
+  fetch(`api/v1/garage/item/${id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ cleanliness }),
+  });
 }
 
 const appendItems = (garageItems) => {
