@@ -51,6 +51,7 @@ const itemDetails = (item) => {
       <div class="details-wrapper">
         <h6>${item.name}</h6>
         <p>Reason it's in Garage: ${item.reason}</p>
+        <p>Cleanliness: ${item.cleanliness}</p>
         <select class="cleanliness-input-details" name="Cleanliness">
           <option value="Sparkling">Sparkling</option>
           <option value="Dusty">Dusty</option>
@@ -82,8 +83,15 @@ const patchItem = (id) => {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ cleanliness }),
+  })
+  .then((response) => {
+    return response.json();
+  })
+  .then((updatedItem) => {
+    $('.item-details').remove();
+    itemDetails(updatedItem);
   });
-}
+};
 
 const appendItems = (garageItems) => {
   garageItems.forEach((garageItem) => {
@@ -150,4 +158,4 @@ const checkInputs = () => {
 
 $('.toggle').on('click', () => {
   $('#door').slideToggle();
-})
+});
