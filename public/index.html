@@ -3,19 +3,36 @@
   <head>
     <title>Garage Bin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
-    <link rel="stylesheet" type="text/css" href="./styles/normalize.css">
     <link rel="stylesheet" type="text/css" href="./styles/main.css">
+    <link rel="stylesheet" type="text/css" href="./styles/normalize.css">
   </head>
   <body>
+    <h1 id="main-title">Garage Bin</h1>
+    <div class="counter-div">
+      <h6>Total Items: <span class="total-items-count">0</span></h6>
+      <h6 >Sparkling: <span class="sparkling-items-count">0</span></h6>
+      <h6 >Dusty: <span class="dusty-items-count">0</span></h6>
+      <h6 >Ranicd: <span class="rancid-items-count">0</span></h6>
+    </div>
+    <section id="garage">
 
-
-
-
+    </section>
+    <section class="add-item">
+      <input class="name-input" type="text" placeholder="Item Name"/>
+      <input class="reason-input" type="text" placeholder="Reason for storage"/>
+      <select class="cleanliness-input" name="Cleanliness">
+        <option value="Sparkling">Sparkling</option>
+        <option value="Dusty">Dusty</option>
+        <option value="Rancid">Rancid</option>
+      </select>
+      <button class="add-item-btn">Add Item</button>
+    </section>
 
     <script
       src="https://code.jquery.com/jquery-3.2.1.min.js"
       integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
       crossorigin="anonymous">
     </script>
+    <script src="./lib/app.js"></script>
   </body>
 </html>
