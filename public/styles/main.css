@@ -9,6 +9,8 @@ body {
 }
 
 #garage {
+  display: flex;
+  flex-direction: column;
   width: 90%;
   margin: 0 auto;
   max-width: 800px;
@@ -16,5 +18,57 @@ body {
 
 .garage-item {
   height: 30px;
+  width: 50%;
+  margin: 0 auto;
   font-size: 1.4em;
+}
+
+.item-details {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+  background: antiquewhite;
+}
+
+.details-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 600px;
+  margin: 0 auto;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.add-item {
+  width: 300px;
+  margin: 0 auto;
+}
+
+input {
+  width: 100%;
+  border: 1px solid magenta;
+  height: 25px;
+  margin: 10px 0;
+}
+
+.cleanliness-input {
+  width: 100%;
+  height: 25px;
+  margin: 10px 0;
+}
+
+.add-item-btn {
+  width: 100%;
+  height: 25px;
+  margin: 10px 0;
+  border: 1px solid magenta;
+  background: transparent;
 }
