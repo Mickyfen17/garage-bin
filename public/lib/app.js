@@ -27,13 +27,31 @@ const updateCouters = (cleanliness) => {
   }
 };
 
+const itemLink = (link, id) => {
+  link.on('click', () => {
+    fetchSingleItem(id);
+  });
+};
+
+const fetchSingleItem = (id) => {
+  fetch(`api/v1/garage/${id}`)
+    .then((response) => {
+      return response.json();
+    })
+    .then((returnedItem) => {
+      console.log(returnedItem);
+    });
+};
+
 const appendItems = (garageItems) => {
   garageItems.forEach((garageItem) => {
-    const itemNode = $(`<article class="garage-item">${garageItem.name}</article>`)
+    const itemNode = $(`<article class="garage-item">${garageItem.name}</article>`);
     updateCouters(garageItem.cleanliness.toLowerCase());
+    itemLink(itemNode, garageItem.id);
     $('#garage').append(itemNode);
   });
 };
+
 
 const addNewItem = (name, reason, cleanliness) => {
   fetch('/api/v1/garage/new', {
