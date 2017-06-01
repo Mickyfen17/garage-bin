@@ -7,7 +7,7 @@ const configuration = require('../knexfile')[environment];
 const database = require('knex')(configuration);
 
 router.get('/garage', (request, response) => {
-  database('garage').select()
+  database('garage').select().orderBy('name', 'asc')
     .then((allItems) => {
       response.status(200).json(allItems);
     })
