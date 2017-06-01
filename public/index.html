@@ -3,19 +3,29 @@
   <head>
     <title>Garage Bin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
-    <link rel="stylesheet" type="text/css" href="./styles/normalize.css">
     <link rel="stylesheet" type="text/css" href="./styles/main.css">
+    <link rel="stylesheet" type="text/css" href="./styles/normalize.css">
   </head>
   <body>
+    <h1 id="main-title">Garage Bin</h1>
+    <section id="garage">
 
-
-
-
+    </section>
+    <section class="add-item">
+      <input type="text" placeholder="Item Name"/>
+      <input type="text" placeholder="Reason for storage"/>
+      <select name="Cleanliness">
+        <option value="Sparkling">Sparkling</option>
+        <option value="Dusty">Dusty</option>
+        <option value="Rancid">Rancid</option>
+      </select>
+    </section>
 
     <script
       src="https://code.jquery.com/jquery-3.2.1.min.js"
       integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
       crossorigin="anonymous">
     </script>
+    <script src="./lib/app.js"></script>
   </body>
 </html>
