@@ -136,7 +136,7 @@ $('.sort-btn').on('click', () => {
 const checkInputs = () => {
   $('.error').remove();
   let haveVals;
-  const error = $('<p class="error">Else enter a vlaue in all fields</p>');
+  const error = $('<p class="error">Else enter a value in all fields</p>');
   $('input').each((i, input) => {
     if (!input.value.length) {
       $('.add-item-btn').append(error);
