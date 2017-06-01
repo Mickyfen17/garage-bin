@@ -18,6 +18,10 @@ app.set('port', process.env.PORT || 3000);
 
 app.use('/api/v1', routes);
 
+app.get('/*', (request, response) => {
+  response.status(404).send({ error: 'Not Found' });
+});
+
 if (!module.parent) {
   app.listen(app.get('port'), () => {
     console.log(`Server is listening on ${app.get('port')}.`)
