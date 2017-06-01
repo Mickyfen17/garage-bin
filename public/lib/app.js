@@ -50,3 +50,29 @@ const renderCounters = () => {
   $('body').append(counterDiv);
 };
 
+$('.add-item-btn').on('click', () => {
+  grabInputValues();
+})
+
+const grabInputValues = () => {
+  const nameInputVal = $('.name-input').val();
+  const reasonInputVal = $('.reason-input').val();
+  const cleanlinessInputVal = $('.cleanliness-input').val();
+  addNewItem(nameInputVal, reasonInputVal, cleanlinessInputVal);
+};
+
+const addNewItem = (name, reason, cleanliness) => {
+  fetch('/api/v1/garage/new', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, reason, cleanliness }),
+  })
+  .then((response) => {
+    console.log(response);
+    return response.json();
+  })
+  .then((newItem) => {
+    console.log(newItem);
+    appendItems(newItem);
+  });
+};
