@@ -39,14 +39,13 @@ const fetchSingleItem = (id) => {
       return response.json();
     })
     .then((returnedItem) => {
-      console.log(returnedItem);
       itemDetails(returnedItem);
     });
 };
 
 const itemDetails = (item) => {
-  const closeBtn = $(`<button class="close-btn">Close</button>`);
-  const updateBtn = $(`<button class="update-btn">Update</button>`);
+  const closeBtn = $('<button class="close-btn">Close</button>');
+  const updateBtn = $('<button class="update-btn">Update</button>');
   const details = $(`
     <article class="item-details">
       <div class="details-wrapper">
@@ -114,7 +113,16 @@ const grabInputValues = () => {
   const nameInputVal = $('.name-input').val();
   const reasonInputVal = $('.reason-input').val();
   const cleanlinessInputVal = $('.cleanliness-input').val();
-  addNewItem(nameInputVal, reasonInputVal, cleanlinessInputVal);
+  const inputsHaveValues = checkInputs();
+
+  if(inputsHaveValues) {
+    addNewItem(nameInputVal, reasonInputVal, cleanlinessInputVal);
+    clearInputs();
+  }
+};
+
+const clearInputs = () => {
+  $(':text').val('');
 };
 
 $('.add-item-btn').on('click', () => {
@@ -124,3 +132,18 @@ $('.add-item-btn').on('click', () => {
 $('.sort-btn').on('click', () => {
   console.log('SORTING');
 });
+
+const checkInputs = () => {
+  $('.error').remove();
+  let haveVals;
+  const error = $('<p class="error">Else enter a vlaue in all fields</p>');
+  $('input').each((i, input) => {
+    if (!input.value.length) {
+      $('.add-item-btn').append(error);
+      haveVals = false;
+    } else {
+      haveVals = true;
+    }
+  });
+  return haveVals;
+};
