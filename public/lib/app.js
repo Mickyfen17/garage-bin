@@ -1,15 +1,26 @@
+let globalOrder = 'asc';
+
 $(() => {
-  fetchGarageItems();
+  fetchGarageItems(globalOrder);
 });
 
-const fetchGarageItems = () => {
-  fetch('api/v1/garage')
+const fetchGarageItems = (order) => {
+  fetch(`api/v1/garage?order=${order}`)
   .then((response) => {
     return response.json();
   })
   .then((garageItems) => {
+    $('.garage-item').remove();
+    clearCounters();
     appendItems(garageItems)
   });
+};
+
+clearCounters = () => {
+  $('.total-items-count').text(0);
+  $('.sparkling-items-count').text(0);
+  $('.dusty-items-count').text(0);
+  $('.rancid-items-count').text(0);
 };
 
 const updateCouters = (cleanliness) => {
@@ -51,6 +62,7 @@ const itemDetails = (item) => {
       <div class="details-wrapper">
         <h6>${item.name}</h6>
         <p>Reason it's in Garage: ${item.reason}</p>
+        <p>Cleanliness: ${item.cleanliness}</p>
         <select class="cleanliness-input-details" name="Cleanliness">
           <option value="Sparkling">Sparkling</option>
           <option value="Dusty">Dusty</option>
@@ -62,13 +74,13 @@ const itemDetails = (item) => {
   closeDetails(closeBtn);
   updateItem(updateBtn, item.id);
   $('#garage').append(details.append(closeBtn, updateBtn));
-}
+};
 
 const closeDetails = (closeBtn) => {
   closeBtn.on('click', () => {
     $('.item-details').remove();
   })
-}
+};
 
 const updateItem = (updateBtn, id) => {
   updateBtn.on('click', () => {
@@ -82,8 +94,15 @@ const patchItem = (id) => {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ cleanliness }),
+  })
+  .then((response) => {
+    return response.json();
+  })
+  .then((updatedItem) => {
+    $('.item-details').remove();
+    itemDetails(updatedItem);
   });
-}
+};
 
 const appendItems = (garageItems) => {
   garageItems.forEach((garageItem) => {
@@ -115,7 +134,7 @@ const grabInputValues = () => {
   const cleanlinessInputVal = $('.cleanliness-input').val();
   const inputsHaveValues = checkInputs();
 
-  if(inputsHaveValues) {
+  if (inputsHaveValues) {
     addNewItem(nameInputVal, reasonInputVal, cleanlinessInputVal);
     clearInputs();
   }
@@ -130,7 +149,8 @@ $('.add-item-btn').on('click', () => {
 });
 
 $('.sort-btn').on('click', () => {
-  console.log('SORTING');
+  const checkedOrder = globalOrder === 'asc' ? globalOrder = 'desc' : globalOrder = 'asc';
+  fetchGarageItems(checkedOrder)
 });
 
 const checkInputs = () => {
@@ -150,4 +170,4 @@ const checkInputs = () => {
 
 $('.toggle').on('click', () => {
   $('#door').slideToggle();
-})
+});
