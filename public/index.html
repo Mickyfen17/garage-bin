@@ -5,28 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
     <link rel="stylesheet" type="text/css" href="./styles/main.css">
     <link rel="stylesheet" type="text/css" href="./styles/normalize.css">
+    <link href="https://fonts.googleapis.com/css?family=Barrio" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700" rel="stylesheet">
   </head>
   <body>
     <h1 id="main-title">Garage Bin</h1>
-    <div class="counter-div">
-      <h6>Total Items: <span class="total-items-count">0</span></h6>
-      <h6 >Sparkling: <span class="sparkling-items-count">0</span></h6>
-      <h6 >Dusty: <span class="dusty-items-count">0</span></h6>
-      <h6 >Ranicd: <span class="rancid-items-count">0</span></h6>
-    </div>
-    <section id="garage">
+      <div class="counter-div">
+        <button class="toggle">Toogle Door</button>
+        <h6>Total Items: <span class="total-items-count">0</span></h6>
+        <h6 >Sparkling: <span class="sparkling-items-count">0</span></h6>
+        <h6 >Dusty: <span class="dusty-items-count">0</span></h6>
+        <h6 >Ranicd: <span class="rancid-items-count">0</span></h6>
+      </div>
+      <div class="garage-wrapper">
+      <section id="garage">
+        <button class="sort-btn">Sort By Name</button>
 
-    </section>
-    <section class="add-item">
-      <input class="name-input" type="text" placeholder="Item Name"/>
-      <input class="reason-input" type="text" placeholder="Reason for storage"/>
-      <select class="cleanliness-input" name="Cleanliness">
-        <option value="Sparkling">Sparkling</option>
-        <option value="Dusty">Dusty</option>
-        <option value="Rancid">Rancid</option>
-      </select>
-      <button class="add-item-btn">Add Item</button>
-    </section>
+        <div id="door">
+
+        </div>
+      </section>
+      <section class="add-item">
+        <h4>Add New Item to Garage</h4>
+        <input class="name-input" type="text" placeholder="Item Name"/>
+        <input class="reason-input" type="text" placeholder="Reason for storage"/>
+        <select class="cleanliness-input" name="Cleanliness">
+          <option value="Sparkling">Sparkling</option>
+          <option value="Dusty">Dusty</option>
+          <option value="Rancid">Rancid</option>
+        </select>
+        <button class="add-item-btn">Add Item</button>
+      </section>
+    </div>
 
     <script
       src="https://code.jquery.com/jquery-3.2.1.min.js"
