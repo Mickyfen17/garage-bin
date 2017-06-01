@@ -16,4 +16,20 @@ router.get('/garage', (request, response) => {
     });
 });
 
+router.post('/garage/new', (request, response) => {
+  const expectedPost = ['name', 'reason', 'cleanliness'];
+  const isMissing = expectedPost.every(param => request.body[param]);
+  const garageItem = request.body;
+
+  if (!isMissing) { return response.status(422).send({ error: 'Missing content from post' }); }
+
+  database('garage').insert(garageItem, ['id', 'name', 'reason', 'cleanliness'])
+    .then((newItem) => {
+      response.status(201).json(...newItem);
+    })
+    .catch((error) => {
+      response.status(500).send({ error });
+    });
+});
+
 module.exports = router;
