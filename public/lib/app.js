@@ -40,8 +40,35 @@ const fetchSingleItem = (id) => {
     })
     .then((returnedItem) => {
       console.log(returnedItem);
+      itemDetails(returnedItem);
     });
 };
+
+const itemDetails = (item) => {
+  const closeBtn = $(`<button class="close-btn">X</button>`);
+  const updateBtn = $(`<button class="update-btn">Update</button>`);
+  const details = $(`
+    <article class="item-details">
+      <div class="details-wrapper">
+        <h6>${item.name}</h6>
+        <p>${item.reason}</p>
+        <select class="cleanliness-input" name="Cleanliness">
+          <option value="Sparkling">Sparkling</option>
+          <option value="Dusty">Dusty</option>
+          <option value="Rancid">Rancid</option>
+        </select>
+      </div>
+    </article>
+  `);
+  closeDetails(closeBtn);
+  $('#garage').append(details.append(closeBtn, updateBtn));
+}
+
+const closeDetails = (closeBtn) => {
+  closeBtn.on('click', () => {
+    $('.item-details').remove();
+  })
+}
 
 const appendItems = (garageItems) => {
   garageItems.forEach((garageItem) => {
