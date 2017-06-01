@@ -59,3 +59,7 @@ const grabInputValues = () => {
 $('.add-item-btn').on('click', () => {
   grabInputValues();
 });
+
+$('.sort-btn').on('click', () => {
+  console.log('SORTING');
+});
