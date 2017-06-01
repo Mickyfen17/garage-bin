@@ -50,7 +50,7 @@ const itemDetails = (item) => {
     <article class="item-details">
       <div class="details-wrapper">
         <h6>${item.name}</h6>
-        <p>${item.reason}</p>
+        <p>Reason it's in Garage: ${item.reason}</p>
         <select class="cleanliness-input-details" name="Cleanliness">
           <option value="Sparkling">Sparkling</option>
           <option value="Dusty">Dusty</option>
@@ -147,3 +147,7 @@ const checkInputs = () => {
   });
   return haveVals;
 };
+
+$('.toggle').on('click', () => {
+  $('#door').slideToggle();
+})
