@@ -107,11 +107,25 @@ const patchItem = (id) => {
 const appendItems = (garageItems) => {
   garageItems.forEach((garageItem) => {
     const itemNode = $(`<article class="garage-item">${garageItem.name}</article>`);
+    const deleteBtn = $('<button class="delete-btn">X</button>');
     updateCouters(garageItem.cleanliness.toLowerCase());
     itemLink(itemNode, garageItem.id);
-    $('#garage').append(itemNode);
+    deleteItem(deleteBtn, garageItem.id);
+    $('#garage').append(itemNode.append(deleteBtn));
   });
 };
+
+const deleteItem = (deleteButton, id) => {
+  deleteButton.on('click', (e) => {
+    e.stopPropagation();
+    fetch(`api/v1/garage/item/${id}`, {
+      method: 'DELETE',
+    })
+    .then(() => {
+      fetchGarageItems(globalOrder);
+    });
+  });
+}
 
 
 const addNewItem = (name, reason, cleanliness) => {

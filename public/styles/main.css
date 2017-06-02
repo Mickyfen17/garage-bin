@@ -48,14 +48,16 @@ body {
 }
 
 #door {
+  position: absolute;
+  z-index: 100;
   width: 90%;
   height: 100%;
-  position: absolute;
   background: url('./images/garage-door.jpg');
   margin: 10px 0  0 40px;
 }
 
 .garage-item {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -168,4 +170,13 @@ button {
 button:hover {
   background: #5b7272;
   color: #e0e7e7;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  height: 20px;
+  width: 20px;
+  padding: 0;
 }
