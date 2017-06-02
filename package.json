@@ -5,7 +5,6 @@
   "main": "app.js",
   "scripts": {
     "start": "NODE_ENV=development nodemon server/index.js --ignore public/",
-    "watch": "gulp sass:watch",
     "test": "./node_modules/.bin/mocha"
   },
   "keywords": [],
