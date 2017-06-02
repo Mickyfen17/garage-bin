@@ -165,4 +165,35 @@ describe('API Routes', () => {
       });
     });
   });
+
+  describe('DELETE /api/v1/garage/item/:id', () => {
+    it('should be able to DELETE a specific items for the garage database', (done) => {
+      chai.request(server)
+      .get('/api/v1/garage')
+      .end((error, response) => {
+        response.body.length.should.equal(4);
+        chai.request(server)
+        .delete('/api/v1/garage/item/1')
+        .end((error, response) => {
+          response.should.have.status(204);
+          chai.request(server)
+          .get('/api/v1/garage')
+          .end((error, response) => {
+            response.body.length.should.equal(3);
+            done();
+          });
+        });
+      });
+    });
+
+    it('should respond with a 404 warning if a DELETE is attempted and the item ID does not exist', (done) => {
+      chai.request(server)
+      .delete('/api/v1/garage/item/2000')
+      .end((error, response) => {
+        response.should.have.status(404);
+        response.body.should.deep.equal({ error: 'The item ID is invalid. Delete could not be carried out' });
+        done();
+      });
+    });
+  });
 });
