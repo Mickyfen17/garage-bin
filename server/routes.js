@@ -75,14 +75,19 @@ router.post('/garage/new', (request, response) => {
 router.delete('/garage/item/:id', (request, response) => {
   const { id } = request.params;
 
-  if (!id) { return response.status(422).send({ error: 'ID is missing. Delete could not be carried out' }); }
-
-  database('garage').where('id', id).del()
-    .then(() => {
-      response.sendStatus(204);
-    })
-    .catch((error) => {
-      response.status(500).send({ error });
+  database('garage').where('id', id).select()
+    .then((item) => {
+      if (!item.length) {
+        response.status(404).send({ error: 'The item ID is invalid. Delete could not be carried out' });
+      } else {
+        database('garage').where('id', id).del()
+        .then(() => {
+          response.sendStatus(204);
+        })
+        .catch((error) => {
+          response.status(500).send({ error });
+        });
+      }
     });
 });
 
