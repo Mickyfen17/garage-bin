@@ -100,6 +100,7 @@ const patchItem = (id) => {
   })
   .then((updatedItem) => {
     $('.item-details').remove();
+    fetchGarageItems(globalOrder);
     itemDetails(updatedItem);
   });
 };
